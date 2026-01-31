@@ -1,10 +1,10 @@
-# Dala Skills
+# Dala Care Skills
 
-AI-readable documentation for the Dala Care GraphQL API.
+Automate your home care operations with AI-powered assistance for Dala Care.
 
-## Purpose
+## What is This?
 
-This repository contains skills documentation that teaches AI assistants how to interact directly with the Dala Care healthcare workforce management platform. Rather than using an MCP server wrapper, AI can use these skills to make GraphQL requests directly to the API.
+This skill enables AI assistants to help you manage your home care agency through Dala Care. Once installed, you can ask your AI assistant to schedule visits, check caregiver availability, update care plans, and more - all through natural conversation.
 
 ## Installation
 
@@ -14,21 +14,17 @@ Install this skill using Claude Code or other compatible AI tools:
 npx skills add https://github.com/careverk/dala-skills
 ```
 
-## Contents
+## What You Can Do
 
-- **SKILL.md** - Comprehensive guide covering authentication, queries, mutations, data types, and common workflows
+With this skill installed, your AI assistant can help you:
 
-## Usage
+- **Schedule & Manage Visits** - Create one-time or recurring visits, modify schedules, and cancel when needed
+- **Coordinate Caregivers** - Check availability, view assignments, and find the right caregiver for each visit
+- **Track Care Recipients** - Access client profiles, visit history, and care plan details
+- **Monitor Operations** - View daily schedules, identify open shifts, and track visit status
+- **Update Care Plans** - Modify client information and care plan fields
 
-Once installed, the skill provides context to AI assistants when interacting with the Dala Care API. The document includes:
+## Regional Endpoints
 
-- Authentication setup (API key in `Authorization` header)
-- Core queries (offices, care recipients, caregivers, visits, availability)
-- Core mutations (scheduling, updates, cancellations, care plans)
-- Reference types and enums
-- Common workflow patterns
-
-## API Endpoints
-
-- **Production:** `https://api.prod.dala.care/graphql`
-- **Development:** `https://api.dev.dala.care/graphql`
+- **EU:** `https://api.eu.dala.care/graphql`
+- **US:** `https://api.us.dala.care/graphql`
