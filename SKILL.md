@@ -1,6 +1,12 @@
 ---
 name: dala-care-api
 description: Interact with the Dala Care healthcare workforce management platform via its GraphQL API
+metadata:
+  author: careverk
+  version: "1.0.0"
+  skillport:
+    category: api
+    tags: [healthcare, graphql, api, scheduling, workforce-management]
 ---
 
 # Dala Care GraphQL API
