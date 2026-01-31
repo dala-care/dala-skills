@@ -6,13 +6,21 @@ AI-readable documentation for the Dala Care GraphQL API.
 
 This repository contains skills documentation that teaches AI assistants how to interact directly with the Dala Care healthcare workforce management platform. Rather than using an MCP server wrapper, AI can use these skills to make GraphQL requests directly to the API.
 
+## Installation
+
+Install this skill using Claude Code or other compatible AI tools:
+
+```bash
+npx skills add https://github.com/careverk/dala-skills
+```
+
 ## Contents
 
-- **skills.md** - Comprehensive guide covering authentication, queries, mutations, data types, and common workflows
+- **SKILL.md** - Comprehensive guide covering authentication, queries, mutations, data types, and common workflows
 
 ## Usage
 
-Provide `skills.md` to an AI assistant as context when you need it to interact with the Dala Care API. The document includes:
+Once installed, the skill provides context to AI assistants when interacting with the Dala Care API. The document includes:
 
 - Authentication setup (API key in `Authorization` header)
 - Core queries (offices, care recipients, caregivers, visits, availability)
