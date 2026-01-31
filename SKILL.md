@@ -25,8 +25,8 @@ API keys have associated roles that determine access permissions across the orga
 
 ## Endpoints
 
-- **Production:** `https://api.prod.dala.care/graphql`
-- **Development:** `https://api.dev.dala.care/graphql`
+- **EU:** `https://api.eu.dala.care/graphql`
+- **US:** `https://api.us.dala.care/graphql`
 
 ## Making Requests
 
