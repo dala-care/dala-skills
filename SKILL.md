@@ -1,6 +1,6 @@
 ---
 name: dala-care-api
-description: Interact with the Dala Care healthcare workforce management platform via its GraphQL API
+description: Manage home care operations - schedule visits, coordinate caregivers, track care recipients, and streamline workforce management with Dala Care
 metadata:
   author: careverk
   version: "1.0.0"
@@ -9,42 +9,25 @@ metadata:
     tags: [healthcare, graphql, api, scheduling, workforce-management]
 ---
 
-# Dala Care GraphQL API
+# Dala Care
 
-This skill teaches how to interact with the Dala Care healthcare workforce management platform via its GraphQL API.
+Dala Care is a healthcare workforce management platform that helps home care agencies coordinate caregivers, manage care recipients, and optimize scheduling. This skill enables you to automate care operations, access real-time data, and integrate Dala Care into your workflows.
 
-## Authentication
+## What You Can Do
 
-All API requests require an API key passed in the `Authorization` header:
-
-```
-Authorization: <api-key>
-```
-
-API keys have associated roles that determine access permissions across the organization hierarchy (Tenant > Division > Region > Office).
-
-## Endpoints
-
-- **EU:** `https://api.eu.dala.care/graphql`
-- **US:** `https://api.us.dala.care/graphql`
-
-## Making Requests
-
-Send POST requests with:
-- `Content-Type: application/json`
-- Body: `{"query": "...", "variables": {...}}`
-
-## Date/Time Format
-
-All dates use ISO 8601 format: `2025-01-15T08:00:00.000Z`
+- **Schedule & Manage Visits**: Create one-time or recurring visits, check caregiver availability, and modify schedules
+- **Track Care Recipients**: Access client information, care plans, contacts, and visit history
+- **Coordinate Caregivers**: View caregiver profiles, availability, and assignments
+- **Monitor Operations**: Get daily schedules, identify open visits, and track visit status
+- **Update Care Plans**: Modify care recipient information and care plan details
 
 ---
 
-## Core Queries
+## Managing Your Organization
 
-### Get Offices
+### View Your Offices
 
-Returns all offices the authenticated user has access to, with their organizational hierarchy.
+Access all offices in your organization, including their regional structure.
 
 ```graphql
 query Offices {
@@ -66,9 +49,11 @@ query Offices {
 
 ---
 
-### Get Care Recipients
+## Working with Care Recipients
 
-List care recipients. Pass empty `officeIds` array to get all accessible care recipients.
+### List Care Recipients
+
+View all care recipients across your offices or filter by specific locations.
 
 ```graphql
 query CareRecipients($officeIds: [String!]!) {
@@ -100,9 +85,9 @@ query CareRecipients($officeIds: [String!]!) {
 
 ---
 
-### Get Care Recipient Details
+### View Care Recipient Profile
 
-Get comprehensive information including contacts, address, care plan, and files.
+Access complete client information including contacts, address, care plan, and files.
 
 ```graphql
 query CareRecipientById($id: ID!) {
@@ -212,9 +197,9 @@ query CareRecipientById($id: ID!) {
 
 ---
 
-### Get Care Recipients Visits
+### View Visit History
 
-Query visits for a specific care recipient within a date range.
+See all visits for a care recipient within a specific time period.
 
 ```graphql
 query CareRecipientVisits($careRecipientId: ID!, $from: String!, $to: String!) {
@@ -283,9 +268,11 @@ query CareRecipientVisits($careRecipientId: ID!, $from: String!, $to: String!) {
 
 ---
 
-### Get Caregivers
+## Managing Caregivers
 
-List caregivers for specified offices.
+### View Caregivers
+
+Access caregiver profiles across your offices.
 
 ```graphql
 query CareGivers($officeIds: [String!]!) {
@@ -314,9 +301,11 @@ query CareGivers($officeIds: [String!]!) {
 
 ---
 
-### Get Events by Office (Day Summary)
+## Scheduling & Daily Operations
 
-Get all events (visits and absences) for offices in a date range. This is the primary query for understanding daily scheduling status.
+### View Daily Schedule
+
+See all visits and caregiver absences for your offices on any given day.
 
 ```graphql
 query EventsByOfficeIds($officeIds: [ID!]!, $from: String!, $to: String!) {
@@ -390,7 +379,7 @@ query EventsByOfficeIds($officeIds: [ID!]!, $from: String!, $to: String!) {
 
 ### Check Caregiver Availability
 
-Query which caregivers are available for a proposed visit time.
+Find which caregivers are available for a proposed visit time, including recurring schedules.
 
 ```graphql
 query CaregiverAvailabilities($officeIds: [ID!]!, $input: VisitorAvailabilityInput!) {
@@ -431,11 +420,11 @@ query CaregiverAvailabilities($officeIds: [ID!]!, $input: VisitorAvailabilityInp
 
 ---
 
-## Core Mutations
+## Creating & Updating Visits
 
 ### Schedule a Visit
 
-Create a new visit (one-time or recurring).
+Create one-time or recurring visits for care recipients.
 
 ```graphql
 mutation ScheduleVisit($input: VisitCreateInputV2!) {
@@ -504,9 +493,9 @@ mutation ScheduleVisit($input: VisitCreateInputV2!) {
 
 ---
 
-### Update a Visit (Future)
+### Modify an Upcoming Visit
 
-Modify a future visit instance.
+Change details for a scheduled visit that hasn't happened yet.
 
 ```graphql
 mutation UpdateVisit($input: VisitUpdateInput!) {
@@ -542,9 +531,9 @@ mutation UpdateVisit($input: VisitUpdateInput!) {
 
 ---
 
-### Update a Visit Log (Past)
+### Edit a Completed Visit
 
-Modify a past visit (visit log).
+Update details for visits that have already occurred.
 
 ```graphql
 mutation UpdateVisitLog($visitInstanceId: ID!, $input: VisitLogUpdateInput!) {
@@ -584,9 +573,9 @@ mutation UpdateVisitLog($visitInstanceId: ID!, $input: VisitLogUpdateInput!) {
 
 ---
 
-### Update Care Plan
+### Update Care Plans
 
-Modify care plan fields for a care recipient.
+Modify care plan information for your care recipients.
 
 ```graphql
 mutation CareRecipientCarePlanUpsert($careRecipientId: String!, $input: CarePlanInput!) {
@@ -733,28 +722,44 @@ Tenant (organization)
 
 ## Common Workflows
 
-### Find Available Caregivers and Schedule a Visit
+### Scheduling a New Visit
 
-1. Query `Offices` to get office IDs
-2. Query `CareRecipients` to find the care recipient
-3. Query `CaregiverAvailabilities` with proposed time to find available caregivers
-4. Execute `ScheduleVisit` mutation with selected caregivers
+1. View your offices to identify the location
+2. Find the care recipient who needs the visit
+3. Check which caregivers are available at the proposed time
+4. Create the visit with your selected caregiver(s)
 
-### View Daily Schedule and Find Open Visits
+### Finding Open Shifts
 
-1. Query `EventsByOfficeIds` for the target date range
-2. Filter visits where `requiredCaregiversCount > visitorsV2.length` and `cancelledAt` is null
-3. These are visits that need additional caregiver assignments
+1. Pull the daily schedule for your target date range
+2. Look for visits where more caregivers are needed than currently assigned
+3. These open visits can then be filled by assigning available caregivers
 
-### Assign Caregiver to Existing Visit
+### Reassigning a Visit
 
-1. Determine if visit is future (`start > now`) or past
-2. For future visits: use `UpdateVisit` mutation with updated `visitorIds`
-3. For past visits: use `UpdateVisitLog` mutation with visitor details
+1. Check if the visit is upcoming or already completed
+2. For upcoming visits: modify the assigned caregivers
+3. For completed visits: update the visit log with actual caregiver attendance
 
-### Update Care Plan Information
+### Updating Client Information
 
-1. Query `CareRecipientById` to get current care plan fields with their IDs and available values
-2. For `RADIO_FIELD`: value must be one of `availableValues`
-3. For `CHECKBOX_FIELD`: value is comma-separated list from `availableValues`
-4. Execute `CareRecipientCarePlanUpsert` with field updates
+1. Access the care recipient's profile to see current care plan fields
+2. Update the fields with new information following the specified field types
+3. Save changes to keep care plans current
+
+---
+
+## Technical Reference
+
+### Authentication
+
+Authenticate using your API key in the `Authorization` header. Your API key determines which offices and resources you can access based on your role permissions.
+
+### Regional Endpoints
+
+- **EU:** `https://api.eu.dala.care/graphql`
+- **US:** `https://api.us.dala.care/graphql`
+
+### Date Format
+
+All dates use ISO 8601 format: `2025-01-15T08:00:00.000Z`
