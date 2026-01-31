@@ -1,3 +1,8 @@
+---
+name: dala-care-api
+description: Interact with the Dala Care healthcare workforce management platform via its GraphQL API
+---
+
 # Dala Care GraphQL API
 
 This skill teaches how to interact with the Dala Care healthcare workforce management platform via its GraphQL API.
