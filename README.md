@@ -11,8 +11,22 @@ This skill enables AI assistants to help you manage your home care agency throug
 Install this skill using Claude Code or other compatible AI tools:
 
 ```bash
-npx skills add https://github.com/careverk/dala-skills
+npx skills add https://github.com/dala-care/dala-skills
 ```
+
+## Setup
+
+The skill reads your Dala Care API key from the `DALA_CARE_API_KEY` environment variable. Set it in your shell or environment before starting your AI assistant. Never paste the key into a chat.
+
+```bash
+export DALA_CARE_API_KEY=your-api-key
+```
+
+The skill calls `api.us.dala.care` or `api.eu.dala.care` directly, so it works in Claude Code and Cowork. In claude.ai chat those domains are blocked unless an org owner adds them to the network allowlist. If your workspace has the dala.care connector, use that in claude.ai instead.
+
+## Safety
+
+The assistant always shows you the exact change and waits for your confirmation before scheduling, changing or cancelling visits, or editing care plans. It treats care recipient data as protected health information and only fetches what each task needs.
 
 ## What You Can Do
 
